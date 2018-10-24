@@ -16,7 +16,7 @@ export class HttpService {
     
   }
 
-  private endPoint = 'http://localhost:3005';
+  private endPoint = 'http://192.168.0.148:3005';
   postRequest(){
 
   }
