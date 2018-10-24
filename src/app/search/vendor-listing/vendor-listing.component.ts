@@ -3,6 +3,7 @@ import {StatesService} from '../services/states.service';
 import {CityService} from '../services/city.service';
 import {VendorService} from '../services/vendor.service';
 import { Observable } from 'rxjs';
+import {Router} from '@angular/router';
 import 'rxjs/Rx';
 
 @Component({
@@ -12,16 +13,16 @@ import 'rxjs/Rx';
 })
 export class VendorListingComponent implements OnInit {
 
-  constructor(private statesService:StatesService,private cityService:CityService,private vendorService:VendorService) { }
+  constructor(private router: Router,private statesService:StatesService,private cityService:CityService,private vendorService:VendorService) { }
 
   ngOnInit() {
     this.getStates();
   }
-  private states=[{id:0,state_name:"Select State"}];
+   states=[{id:0,state_name:"Select State"}];
   
-  private cities=[{id:0,city_name:"Select City"}];
-  private vendorDetails=[];
-  private resultStatus=0
+   cities=[{id:0,city_name:"Select City"}];
+   vendorDetails=[];
+   resultStatus=0
 
   model: any = {state:0,city:0};
   
@@ -87,10 +88,14 @@ export class VendorListingComponent implements OnInit {
    
 
   }
-
-  fetchItemDetails(vendorId){
-
-    alert(vendorId)
+  fetchItemDetails(id){
+   
+    this.router.navigate(['vendorSearch/view-item-details',id]);
   }
+
+
+
+
+  
 
 }
