@@ -1,5 +1,5 @@
 <div class="middle-content">
-  	
+  
         
   <div class="product-summmary">
    <div class="product-image">
@@ -7,13 +7,10 @@
    </div>
 
    <div class="detail">
-        <div class="col-01"> <strong>Name </strong>:  <span>Lorem Ipsum is simply dummy text</span> <br />
-     <strong>Address  </strong>:  <span>Awasthi Narayana Steel Bank, Address</span> <br />
-     <strong>Pincode </strong>:  <span>110083</span><br />
-     <strong>Available Product </strong>:  <span>Spoon, Fork, Steel Dinner Plate, <br />
-                               Melamine Plates, Steel Compartment Plates,<br />
-                               Kids Plates, Bowls, Coffee/tea tumblers 120 ml<br />
-                               Big tumblers 250 ml</span>
+        <div class="col-01"> <strong>Name </strong>:  <span>{{vendorInfo['name']}}</span> <br />
+     <strong>Address  </strong>:  <span>{{vendorInfo['address']}}</span> <br />
+     <strong>Pincode </strong>:  <span>{{vendorInfo['pin_code']}}</span><br />
+     <strong>Available Product </strong>:  <span>{{vendorInfo['items']| arraytoStingpipe}}</span>
      </div>
    </div>
 
@@ -24,72 +21,19 @@
          <th>Price Per Pcs</th>
          <th width="165px">No. Pcs</th>
        </tr>
-       <tr>
-         <td>Spoon</td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-          <td>Fork</td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Steel Dinner Plate </td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Melamine Plates</td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Steel Compartment Plates </td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-          <td>Snack Plate </td>
-         <td>42 pcs</td>
-         <td>Rs. 120</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Kids Plates</td>
-         <td>13 pcs</td>
-         <td>Rs. 350</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Bowls</td>
-         <td>13 pcs</td>
-         <td>Rs. 450</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Coffee/tea tumblers 120 ml </td>
-         <td>123 pcs</td>
-         <td>Rs.830</td>
-         <td><input type="number" class="qty"></td>
-       </tr>
-       <tr>
-         <td>Big tumblers 250 ml  </td>
-         <td>66 pcs</td>
-         <td>Rs.60</td>
-         <td><input type="number" class="qty"></td>
+       <tr *ngFor="let item of vendorInfo['items']">
+         <td>{{item.item_name}}</td>
+         <td *ngIf="item.inventory">{{item.inventory.available_quantity}} pcs</td>
+         <td *ngIf="!item.inventory">NA</td>
+         <td *ngIf="item.inventory">Rs. {{item.price_unit}}</td>
+         <td *ngIf="!item.inventory">NA</td>
+         <td><input [disabled]="!item.inventory" type="number" class="qty"></td>
        </tr>
 
-      
      </table>
          
      
-     <input type="button" class="btn-sm" value="Next"> 
+     <input  type="button" class="btn-sm" value="Next"> 
 </div>
 
 

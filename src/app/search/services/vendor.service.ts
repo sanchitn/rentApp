@@ -22,4 +22,19 @@ export class VendorService {
     })
    
  }
+
+ findVendorItems(routePoint):Observable<any>{
+  return this.httpMethod.getRequest(routePoint).map(data=>{
+      console.log(data['vendorInfo'])
+     return data['vendorInfo'];
+
+  }).catch(error=>{
+    
+     throw error 
+  })
+ 
+}
+
+
+
 }
