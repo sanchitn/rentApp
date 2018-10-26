@@ -1,0 +1,21 @@
+<div class="login-bg">
+    <div class="login-main">
+      <h1>Login</h1>
+      <div class="white-box">
+        <h2>Enter mobile number</h2>
+        <form [formGroup]='LoginForm' autocomplete="off" autofill="off" (ngSubmit)="loginSubmit()">
+        <div class="middle-align mob-number">
+          <input type="text" value="" formControlName="mobileNo" name="mobileNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNo.errors }"> 
+          
+          <div class="errorMessage" *ngIf="LoginForm.controls.mobileNo.invalid && showErrors" >
+              Please fill your valid mobile number.
+          </div>
+        </div>
+        <div class="middle-align">
+          <input type="submit" class="btn-sm" value="Login">
+        </div>
+      </form>
+      </div>
+    </div>
+
+  </div>
