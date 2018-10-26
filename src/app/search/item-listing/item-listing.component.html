@@ -27,13 +27,13 @@
          <td *ngIf="!item.inventory">NA</td>
          <td *ngIf="item.inventory">Rs. {{item.price_unit}}</td>
          <td *ngIf="!item.inventory">NA</td>
-         <td><input [disabled]="!item.inventory" type="number" class="qty"></td>
+         <td><input *ngIf="item.inventory" min="0" max="{{item.inventory.available_quantity}}" (input)="addItem($event.target.value,item,vendorInfo)" [disabled]="!item.inventory" type="number" class="qty"></td>
        </tr>
 
      </table>
          
      
-     <input  type="button" class="btn-sm" value="Next"> 
+     <input  (click)=addToCart(itemDetails) type="button" class="btn-sm" value="Next"> 
 </div>
 
 

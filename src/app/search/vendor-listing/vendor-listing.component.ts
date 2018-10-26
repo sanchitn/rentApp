@@ -16,6 +16,7 @@ export class VendorListingComponent implements OnInit {
   constructor(private router: Router,private statesService:StatesService,private cityService:CityService,private vendorService:VendorService) { }
 
   ngOnInit() {
+   
     this.getStates();
   }
    states=[{id:0,state_name:"Select State"}];

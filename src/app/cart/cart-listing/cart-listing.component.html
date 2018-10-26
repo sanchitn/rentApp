@@ -1,0 +1,58 @@
+<div class="middle-content">
+  	
+        
+  <div class="product-summmary">
+    <h2>{{cartInfo.vendorName}}</h2>
+
+   <table id="products">
+       <tr>
+         <th>Product Name</th>
+         <th>No. of Order</th>
+         <th width="165px">Price</th>
+       </tr>
+       <tr *ngFor="let itemDetail of cartInfo.items">
+         <td>{{itemDetail.item_name}}</td>
+         <td>{{itemDetail.needed_quantity}} pcs</td>
+         <td>Rs. {{itemDetail.item_total_price}}</td>
+       </tr>
+       
+
+       <tr class="total">
+         <td></td>
+         <td>Pieces:   {{cartInfo.totalPiece}}</td>
+         <td>Subtotal :   Rs {{cartInfo.subTotal}}</td>
+       </tr>
+     </table>
+
+     <table id="transport">
+         <tr>
+           <th>Transportation</th>
+           <th>Price</th>
+           <th></th>
+         </tr>
+         <tr *ngFor="let price of transportationPrice;let i=index">
+           <td>{{price.key}}</td>
+           <td>{{price.value}}</td>
+           <td>
+             <input  [(ngModel)]="price.isChecked" (change)="onFilterChange($event,price.value,i,cartInfo.total)" type="checkbox">
+            
+            </td>
+         </tr>
+         
+                  
+      
+     </table>
+     <div class="total-bar">Total : <b>Rs {{cartInfo.total}}</b></div>
+     <div class="refundable-row">
+         <strong>Refundable Amount</strong><br />
+         <p>Rs <b><i>500</i></b> for upto <b><i>300</i></b> pieces<br />
+         Rs <b><i>1000</i></b> for <b><i>300+</i></b> pieces<br /></p>
+         <strong>Payment :   Cash</strong>
+     </div>
+     <input type="button" class="btn-sm" value="Checkout"> 
+</div>
+
+
+ 
+ 
+</div>

@@ -9,6 +9,7 @@ import {StatesService} from '../search/services/states.service';
 import {CityService} from '../search/services/city.service';
 import {VendorService} from '../search/services/vendor.service';
 import { ItemListingComponent } from './item-listing/item-listing.component';
+
 //import {ArraytoStingpipePipe} from '../pipes/arrayto-stingpipe.pipe'
 @NgModule({
   imports: [

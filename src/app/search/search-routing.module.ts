@@ -6,7 +6,8 @@ import {ItemListingComponent} from './item-listing/item-listing.component'
 const routes: Routes = [
  
   { path: '', component: VendorListingComponent },
-  { path: 'view-item-details/:id', component: ItemListingComponent },
+  { path: 'view-item-details/:id', component: ItemListingComponent }
+  
 ];
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ const routes: Routes = [
     
     
   ],
-  exports:[RouterModule],
+  exports:[],
   declarations: []
 })
 export class SearchRoutingModule { }
