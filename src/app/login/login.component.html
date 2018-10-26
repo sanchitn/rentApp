@@ -1,21 +1,39 @@
 <div class="login-bg">
-    <div class="login-main">
-      <h1>Login</h1>
-      <div class="white-box">
-        <h2>Enter mobile number</h2>
-        <form [formGroup]='LoginForm' autocomplete="off" autofill="off" (ngSubmit)="loginSubmit()">
+  <div class="login-main">
+    <h1>Login</h1>
+    <div class="white-box" *ngIf="!optBox">
+      <h2>Enter mobile number</h2>
+      <form [formGroup]='LoginForm' autocomplete="off" autofill="off" (ngSubmit)="loginSubmit()">
         <div class="middle-align mob-number">
-          <input type="text" value="" formControlName="mobileNo" name="mobileNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNo.errors }"> 
-          
-          <div class="errorMessage" *ngIf="LoginForm.controls.mobileNo.invalid && showErrors" >
-              Please fill your valid mobile number.
+          <input type="text" maxLength="10" value="" formControlName="mobileNo" name="mobileNo" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNo.errors }">
+
+          <div class="errorMessage" *ngIf="LoginForm.controls.mobileNo.invalid && showErrors">
+            Please fill your valid mobile number.
           </div>
         </div>
         <div class="middle-align">
           <input type="submit" class="btn-sm" value="Login">
         </div>
       </form>
-      </div>
+    </div>
+    <div class="white-box" *ngIf="optBox">
+      <h2>Enter One Time Password</h2>
+      <p>One Time Password (OTP) has been sent to your mobile ******9898,
+        please enter the same here to login. </p>
+      <form [formGroup]='OtpForm' autocomplete="off" autofill="off" (ngSubmit)="otpSubmit()">
+        <div class="middle-align">
+          <input type="text" value="" maxLength="4" value="" formControlName="optNumber" name="optNumber" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && OtpForm.controls.optNumber.errors }"> 
+          <div class="errorMessage" *ngIf="OtpForm.controls.optNumber.invalid && showErrors">
+              Please fill your valid otp number.
+            </div>
+          </div>
+        <div class="middle-align"><input type="button" class="btn-sm" value="Verify"></div>
+      </form>
     </div>
 
+
   </div>
+
+</div>
