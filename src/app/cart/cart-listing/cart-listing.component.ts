@@ -105,4 +105,9 @@ export class CartListingComponent implements OnInit {
 
   }
 
+  checkout(data){
+    
+    this.localStorages.setKey('finalCartDetails',data);
+  }
+
 }
