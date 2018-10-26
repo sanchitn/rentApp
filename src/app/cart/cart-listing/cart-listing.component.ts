@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../../shared/local-storage.service'
+import { LocalStorageService } from '../../shared/local-storage.service';
+import {HttpService} from '../../shared/http.service'
 @Component({
   selector: 'app-cart-listing',
   templateUrl: './cart-listing.component.html',
@@ -10,7 +11,7 @@ export class CartListingComponent implements OnInit {
   //transport = 0
   private items: any;
   totalSum = 0;
-  constructor(private localStorages: LocalStorageService) { }
+  constructor(private localStorages: LocalStorageService,private HttpService:HttpService) { }
 
   transportationPrice=[]
 
@@ -106,7 +107,11 @@ export class CartListingComponent implements OnInit {
   }
 
   checkout(data){
-    
+    this.HttpService.postRequest().subscribe(data=>{
+
+
+      
+    })
     this.localStorages.setKey('finalCartDetails',data);
   }
 
