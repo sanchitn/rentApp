@@ -20,10 +20,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
   submitted = false;
   optBox = false;
   otpPayload = {};
+  mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$"; 
 
   ngOnInit() {
     this.LoginForm = this.formBuilder.group({
-      'mobileNumber': new FormControl(null, { validators: [Validators.required] })
+      'mobileNumber': new FormControl(null, { validators: [Validators.required, Validators.pattern(this.mobnumPattern)] })
     })
   }
   ngAfterViewInit() {
@@ -97,4 +98,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       );
   }
+
+  
 }

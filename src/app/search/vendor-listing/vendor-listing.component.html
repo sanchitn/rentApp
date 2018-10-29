@@ -1,62 +1,59 @@
 <div class="middle-content">
-  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-  <div class="address-details">
-        <div class="col-01">
-        
-            <label>State:</label>
-             <select name="state" [(ngModel)]="model.state" #state="ngModel" (change)="onChangeGetCities($event.target.value)">
-                                                                                                    
-                <option  *ngFor="let state of states"  value={{state.id}}>
-                    {{state.state_name}}
-                </option>
-          </select>
-         </div> 
-         <div class="col-01">  
-            <label>City:</label> 
-            
-            <select name="city" [(ngModel)]="model.city" #city="ngModel">
-                
-                <option *ngFor="let city of cities" value={{city.id}}>
-                    {{city.city_name}}
-                </option>
-          </select>
-           </div>
-          <div class="col-01">    
-            <label>Pincode:</label>
-            <input  name="zipCode" [(ngModel)]="model.zipCode" #zipCode="ngModel" type="text" required>
-           </div>
-           <div class="search-main">
-              <button class="checkout-btn">Search</button>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="address-details">
+            <div class="col-01">
+
+                <label>State:</label>
+                <select name="state" [(ngModel)]="model.state" #state="ngModel" (change)="onChangeGetCities($event.target.value)">
+
+                    <option *ngFor="let state of states" value={{state.id}}>
+                        {{state.state_name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-01">
+                <label>City:</label>
+
+                <select name="city" [(ngModel)]="model.city" #city="ngModel">
+
+                    <option *ngFor="let city of cities" value={{city.id}}>
+                        {{city.city_name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-01">
+                <label>Pincode:</label>
+                <input name="zipCode" [(ngModel)]="model.zipCode" #zipCode="ngModel" type="text" required>
+            </div>
+            <div class="search-main">
+                <button class="checkout-btn">Search</button>
                 <!-- <input type="button" class="checkout-btn" value="Search"> -->
-           </div>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="resultStatus">
+        <div *ngFor="let vendor of vendorDetails" class="product-summmary">
+            <div class="col-01">
+                Name : <span>{{vendor.name}}</span><br />
+                Address : <span>{{vendor.address}}</span><br />
+                Pincode : <span>{{vendor.pin_code}}</span><br />
+            </div>
+
+            <div class="col-01">
+                Available Product : <span>{{vendor.items | arraytoStingpipe}}</span><br />
+
+            </div>
+            <input (click)="fetchItemDetails(vendor.uid)" type="button" class="btn-sm" value="Click Here">
+        </div>
     </div>
-  </form>
-     <div *ngFor="let vendor of vendorDetails" class="product-summmary">
-     <div class="col-01"> 
-             Name :   <span>{{vendor.name}}</span><br />
-             Address : <span>{{vendor.address}}</span><br />
-             Pincode :   <span>{{vendor.pin_code}}</span><br />
-          </div>
-          
-           <div class="col-01"> 
-             Available Product  :   <span>{{vendor.items | arraytoStingpipe}}</span><br />
-             
-          </div>
-             <input (click)="fetchItemDetails(vendor.uid)" type="button" class="btn-sm" value="Click Here"> 
-  </div>
-  
-  <div *ngIf="resultStatus==1" class="product-summmary">
-      <div class="col-01"> 
-             
-           </div>
-           
-            <div class="col-01"> 
-              No Result Found
-              
-           </div>
-              
-   </div>
-  
-    
-    
+
+    <div *ngIf="!resultStatus">
+        <div class="col-01 product-summmary">
+            {{messageResult}}
+        </div>
+
+    </div>
+
+
+
 </div>

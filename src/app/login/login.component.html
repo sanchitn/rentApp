@@ -5,7 +5,7 @@
       <h2>Enter mobile number</h2>
       <form [formGroup]='LoginForm' autocomplete="off" autofill="off" (ngSubmit)="loginSubmit()">
         <div class="middle-align mob-number">
-          <input type="text" maxLength="10" value="" formControlName="mobileNumber" name="mobileNumber" class="form-control"
+          <input type="text" maxLength="10" pattern="^[0-9]*" value="" formControlName="mobileNumber" name="mobileNumber" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNumber.errors }">
 
           <div class="errorMessage" *ngIf="LoginForm.controls.mobileNumber.invalid && showErrors">
