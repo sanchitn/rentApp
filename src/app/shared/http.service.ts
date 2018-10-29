@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpResponse,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpResponse,HttpHeaders} from '@angular/common/http';
 import { Http, Response } from '@angular/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -13,12 +13,26 @@ export class HttpService {
   
   constructor(private http:HttpClient) { 
 
-    
+   
   }
 
-  private endPoint = 'http://localhost:3005';
-  postRequest(){
+  private endPoint = 'http://192.168.0.148:3005';
 
+  createAuthorizationHeader(headers: HttpHeaders) {
+    headers['Content/Type']='application/Json';
+    headers['x-Trigger']='CORS';
+    
+  }
+  postRequest(){
+    let headers = new HttpHeaders();
+    this.createAuthorizationHeader(headers);
+  
+    
+    var data={"mobileNumber":8888888888};
+    return this.http.post("http://localhost:3005/signIn", data,{headers:headers}).map(data=>{
+
+      console.log(data)
+    })
   }
 
   getRequest(routePoint):Observable<{}>{
