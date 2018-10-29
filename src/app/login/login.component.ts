@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,38 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  loginService: any;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private loginService: LoginService, private formBuilder: FormBuilder) { }
 
   LoginForm: FormGroup;
   OtpForm: FormGroup;
 
   showErrors = false;
+  message = '';
   submitted = false;
   optBox = false;
+  otpPayload = {};
 
   ngOnInit() {
     this.LoginForm = this.formBuilder.group({
-      'mobileNo': new FormControl(null, { validators: [Validators.required] })
-      // quantity: this.fb.control(123)
+      'mobileNumber': new FormControl(null, { validators: [Validators.required] })
     })
-
-    // this.LoginForm = new FormGroup({
-    //   'mobileNo': new FormControl(null, { validators: [Validators.required] })
-    // });
-    sessionStorage.clear();
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.OtpForm = this.formBuilder.group({
-      'optNumber': new FormControl(null, { validators: [Validators.required] })
-      // quantity: this.fb.control(123)
+      'otp': new FormControl(null, { validators: [Validators.required] })
+      // optNumber: this.formBuilder.control(123)
     })
   }
 
   loginSubmit() { // valid login function 
     this.submitted = true;
     if (this.LoginForm.valid) {
+      console.log("login details");
       this.verifyLogin();
     } else {
       this.showErrors = true;
@@ -47,15 +44,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   verifyLogin() { //verifying the user's mobile no
-    this.optBox = true;
     this.loginService.loginApi(this.LoginForm.value)
       .subscribe(
         (exp_res) => {
-          if (exp_res.status === 'success') {
-            sessionStorage.setItem('userData', JSON.stringify(exp_res.data.user));
-            sessionStorage.setItem('token', JSON.stringify(exp_res.data.token));
+          console.log(exp_res);
+          if (exp_res.code === 200) {
+            sessionStorage.setItem('userData', JSON.stringify(exp_res));
             this.optBox = true;
           } else {
             this.showErrors = true;
@@ -70,24 +65,28 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   otpSubmit() { // valid otp number function 
-    console.log('hiui');
     this.submitted = true;
     if (this.OtpForm.valid) {
-      // this.OtpLogin();
+      this.otpPayload = {
+        'otp':this.OtpForm.controls.otp.value,
+        'mobileNumber': this.LoginForm.controls.mobileNumber.value,
+        'role_id': 1
+      };
+      this.OtpLogin();
     } else {
       this.showErrors = true;
       console.log('%c value is not filled', 'color:red');
     }
   }
-  OtpLogin(){
-    this.loginService.otpApi(this.OtpForm.value)
+  OtpLogin() { //otp verify with login
+    this.loginService.otpApi(this.otpPayload)
       .subscribe(
         (exp_res) => {
-          if (exp_res.status === 'success') {
-            sessionStorage.setItem('userData', JSON.stringify(exp_res.data.user));
-            sessionStorage.setItem('token', JSON.stringify(exp_res.data.token));
+          if (exp_res.code === 200) {
+            sessionStorage.setItem('userData', JSON.stringify(exp_res.token));
             this.router.navigate(['vendorSearch']);
           } else {
+            this.message = exp_res.message;
             this.showErrors = true;
             this.submitted = false;
           }

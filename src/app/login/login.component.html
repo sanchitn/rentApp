@@ -5,10 +5,10 @@
       <h2>Enter mobile number</h2>
       <form [formGroup]='LoginForm' autocomplete="off" autofill="off" (ngSubmit)="loginSubmit()">
         <div class="middle-align mob-number">
-          <input type="text" maxLength="10" value="" formControlName="mobileNo" name="mobileNo" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNo.errors }">
+          <input type="text" maxLength="10" value="" formControlName="mobileNumber" name="mobileNumber" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && LoginForm.controls.mobileNumber.errors }">
 
-          <div class="errorMessage" *ngIf="LoginForm.controls.mobileNo.invalid && showErrors">
+          <div class="errorMessage" *ngIf="LoginForm.controls.mobileNumber.invalid && showErrors">
             Please fill your valid mobile number.
           </div>
         </div>
@@ -23,13 +23,16 @@
         please enter the same here to login. </p>
       <form [formGroup]='OtpForm' autocomplete="off" autofill="off" (ngSubmit)="otpSubmit()">
         <div class="middle-align">
-          <input type="text" value="" maxLength="4" value="" formControlName="optNumber" name="optNumber" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && OtpForm.controls.optNumber.errors }"> 
-          <div class="errorMessage" *ngIf="OtpForm.controls.optNumber.invalid && showErrors">
+          <input type="text" value="" maxLength="4" value="" formControlName="otp" name="otp" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && OtpForm.controls.otp.errors }"> 
+          <div class="errorMessage" *ngIf="OtpForm.controls.otp.invalid">
               Please fill your valid otp number.
             </div>
+            <div class="errorMessage" *ngIf="showErrors">
+              {{message}}
+            </div>
           </div>
-        <div class="middle-align"><input type="button" class="btn-sm" value="Verify"></div>
+        <div class="middle-align"><input type="submit" class="btn-sm" value="Verify"></div>
       </form>
     </div>
 

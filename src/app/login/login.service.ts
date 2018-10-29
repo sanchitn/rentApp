@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from '../shared/base.service';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends BaseService {
-  urlLabel = '';
   constructor(private httpClient: HttpClient) {
     super(httpClient);
-      // this.urlLabel = Object.freeze();
-     }
-  
-     loginApi(data): Observable<any> {
-      return this.sendData(`${this.urlLabel}/login`, data);
-    }
-
-    // loginData(postData) {
-    //   return this.httpClient.post(`${this.API_URL}/contacts`, postData);
-    // }
-  
+    // this.endPoint = Object.freeze();
   }
-    
+
+  private endPoint = 'http://localhost:3005';
+
+  loginApi(data): Observable<any> {
+    var url = `${this.endPoint}/signIn`;
+    return this.sendData(`${this.endPoint}/signIn`, data);
+  }
+  otpApi(data): Observable<any> {
+    return this.sendData(`${this.endPoint}/verifyOtp`, data);
+  }
+
+}

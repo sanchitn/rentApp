@@ -6,8 +6,8 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class BaseService {
-  protected prefix = '/api/';
-  protected headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'null' });
+  protected prefix = 'http://localhost:3005';
+  protected headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   protected options = { headers: this.headers };
   private router: Router;
   constructor(public http: HttpClient) {
@@ -16,7 +16,7 @@ export class BaseService {
 
   getData(url, header?) {
     const headers = header || this.options;
-    return this.http.get(this.prefix + url, headers).pipe(
+    return this.http.get( url, headers).pipe(
       map(response => {
         return response;
       }),
@@ -39,7 +39,7 @@ export class BaseService {
       console.log('this.prefix + url', this.prefix + url);
       console.log('this.prefix + resource', resource);
       console.log('this.prefix + headers', headers);
-      return this.http.post(this.prefix + url, resource, headers).pipe(
+      return this.http.post(url, resource, headers).pipe(
         map(response => {
           return response;
         }),
@@ -51,7 +51,7 @@ export class BaseService {
   }
 
   updateData(url, resource): Observable<any> {
-    return this.http.put(this.prefix + url, JSON.stringify(resource), this.options).pipe(
+    return this.http.put(url, JSON.stringify(resource), this.options).pipe(
       map(response => {
         return response;
       }),
