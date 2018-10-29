@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         (exp_res) => {
           console.log(exp_res);
           if (exp_res.code === 200) {
+            exp_res.userId = 'user';
             sessionStorage.setItem('userData', JSON.stringify(exp_res));
+            localStorage.setItem('userId', exp_res.userId);
             this.optBox = true;
           } else {
             this.showErrors = true;
@@ -85,7 +87,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
         (exp_res) => {
           if (exp_res.code === 200) {
             sessionStorage.setItem('userData', JSON.stringify(exp_res.token));
-            this.router.navigate(['vendorSearch']);
+            if(localStorage.getItem('userId')){
+              this.router.navigate(['cart']);
+            }else{
+              this.router.navigate(['vendorSearch']);
+            }
           } else {
             this.message = exp_res.message;
             this.showErrors = true;

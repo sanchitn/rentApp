@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../shared/local-storage.service';
 import { HttpService } from '../../shared/http.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart-listing',
   templateUrl: './cart-listing.component.html',
@@ -11,7 +12,8 @@ export class CartListingComponent implements OnInit {
   //transport = 0
   private items: any;
   totalSum = 0;
-  constructor(private localStorages: LocalStorageService, private HttpService: HttpService) { }
+  constructor(private localStorages: LocalStorageService, 
+    private HttpService: HttpService, private router:Router) { }
 
   transportationPrice = []
 
@@ -69,15 +71,11 @@ export class CartListingComponent implements OnInit {
       this.totalSum = total;
       console.log(this.cartInfo)
     }
-
-
   }
 
 
   onFilterChange(e, value, i) {
-
     if (e.target.checked) {
-
       this.transportationPrice.map((item, index) => {
         if (index == i) {
           this.totalSum = this.totalSum + value
@@ -85,13 +83,11 @@ export class CartListingComponent implements OnInit {
           this.cartInfo.transportationPrice = this.transportationPrice[index];
 
         } else {
-
           if (item.isChecked == true) {
             this.totalSum = this.totalSum - item.value
           }
           item.isChecked = false;
         }
-
       })
 
       this.localStorages.setKey('transportation', this.transportationPrice);
@@ -107,12 +103,14 @@ export class CartListingComponent implements OnInit {
   }
 
   checkout(data) {
-    this.HttpService.postRequest().subscribe(data => {
-
-
-
-    })
-    this.localStorages.setKey('finalCartDetails', data);
+    if (sessionStorage.getItem('userData')) {
+      // this.HttpService.postRequest().subscribe(data => {
+      // })
+      this.localStorages.setKey('finalCartDetails', data);
+    }else{
+      console.log("user not logged");
+      this.router.navigate(['login'])
+    }
   }
 
 }
