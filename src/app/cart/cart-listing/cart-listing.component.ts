@@ -103,13 +103,15 @@ export class CartListingComponent implements OnInit {
   }
 
   checkout(data) {
+    this.localStorages.setKey('finalCartDetails', data);
     if (sessionStorage.getItem('userData')) {
       // this.HttpService.postRequest().subscribe(data => {
       // })
-      this.localStorages.setKey('finalCartDetails', data);
+      
+      this.router.navigate(['order-summary']);
     }else{
       console.log("user not logged");
-      this.router.navigate(['login'])
+      this.router.navigate(['login']);
     }
   }
 

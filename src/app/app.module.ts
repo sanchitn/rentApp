@@ -11,13 +11,15 @@ import {LocalStorageService} from './shared/local-storage.service';
 import { LoginComponent } from './login/login.component'
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
