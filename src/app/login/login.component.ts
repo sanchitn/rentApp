@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$"; 
 
   ngOnInit() {
+    sessionStorage.clear();
     this.LoginForm = this.formBuilder.group({
       'mobileNumber': new FormControl(null, { validators: [Validators.required, Validators.pattern(this.mobnumPattern)] })
-    })
+    });
+
   }
   ngAfterViewInit() {
     this.OtpForm = this.formBuilder.group({
