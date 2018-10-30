@@ -18,16 +18,22 @@ export class ItemListingComponent implements OnInit {
       this.vendorId = params.id
     })
   }
+  private qty = 0;
+  private buttonDisabled = true;
+  private showMsg = false;
 
   ngOnInit() {
+    console.log(this.buttonDisabled);
   }
-  ngAfterContentInit(){
+  ngAfterContentInit() {
     this.getItemDetails();
-
+    // if(this.qty>0){
+    //   console.log(this.qty);
+    //   this.buttonDisabled =  true;
+    // }
   }
 
   getItemDetails() {
-    console.log('1', 1 + 1);
     // let vendorId = this.vendorId;
     // let routePath = 'getItemDetails?vendorId=' + this.vendorId;
     this.vendorService.findVendorItems(this.vendorId).subscribe((data) => {
@@ -38,10 +44,12 @@ export class ItemListingComponent implements OnInit {
   }
 
   addItem(quantity, itemDetail, vendorInfo) {
+    this.buttonDisabled =  false;
     itemDetail['needed_quantity'] = parseInt(quantity);
     if (parseInt(quantity) < 1) {
       return false
     }
+
     if (this.itemDetails['items'].length == 0) {
       this.itemDetails['vendorId'] = vendorInfo['uid'];
       this.itemDetails['vendorName'] = vendorInfo['name'];
@@ -49,7 +57,6 @@ export class ItemListingComponent implements OnInit {
 
     } else {
       if (vendorInfo['uid'] != this.itemDetails['vendorId']) {
-        alert("Already you have items in your cart with other vendor");
         return false;
       } else {
 
@@ -64,6 +71,9 @@ export class ItemListingComponent implements OnInit {
   }
 
   addToCart(items) {
+    if(this.qty == 0){
+      this.showMsg =true;
+    }
     this.localStorage.setKey('cartItems', items);
     this.router.navigate(['cart'])
   }

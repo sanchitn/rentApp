@@ -45,9 +45,9 @@
      <div class="total-bar">Total : <b>Rs {{cartInfo.total}}</b></div>
      <div class="refundable-row">
          <strong>Refundable Amount</strong><br />
-         <p>Rs <b><i>500</i></b> for upto <b><i>300</i></b> pieces<br />
-         Rs <b><i>1000</i></b> for <b><i>300+</i></b> pieces<br /></p>
-         <strong>Payment :   Cash</strong>
+         <p>Rs <b><i>{{minLimit}}</i></b> for upto <b><i>{{uptoMinLimit}}</i></b> pieces<br />
+         Rs <b><i>{{maxLimit}}</i></b> for <b><i>{{uptoMaxLimit}}+</i></b> pieces<br /></p>
+         <strong>Payment Mode :  {{paymentMode[0]}}</strong>
      </div>
      <input (click)=checkout(cartInfo) type="button" class="btn-sm" value="Checkout"> 
 </div>
