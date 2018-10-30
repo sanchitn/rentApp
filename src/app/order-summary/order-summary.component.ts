@@ -10,6 +10,9 @@ export class OrderSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('finalCartDetails');
+    localStorage.removeItem('transportation');
   }
 
 }

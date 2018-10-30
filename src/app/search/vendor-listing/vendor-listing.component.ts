@@ -24,11 +24,11 @@ export class VendorListingComponent implements OnInit {
 
   ngOnInit() {
     this.getStates();
+
   }
 
 
   model: any = { state: 0, city: 0 };
-
 
   getStates() {
     var data = {};
@@ -37,14 +37,9 @@ export class VendorListingComponent implements OnInit {
     this.statesService.findStates(data, routePoint).subscribe(
       (result: any) => {
         result.map(item => {
-
-          return this.states.push(item)
+          return this.states.push(item);
         })
-
-
-
       }, (error) => {
-
         console.log("Herer====>", error)
       })
     //console.log("==>",datas)

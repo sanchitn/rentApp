@@ -12,7 +12,6 @@ import 'rxjs/add/operator/catch';
 export class HttpService {
   
   constructor(private http:HttpClient) { 
-
    
   }
 

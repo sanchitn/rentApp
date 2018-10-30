@@ -10,6 +10,7 @@ export class BaseService {
   protected headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   protected options = { headers: this.headers };
   private router: Router;
+  
   constructor(public http: HttpClient) {
 
   }
@@ -26,20 +27,9 @@ export class BaseService {
   }
 
   sendData(url, resource, header?) {
-    let headers;
-    // const x = this.setCustomHeaders(resource);
-    // if (header) {
-    //   headers = x;
-    // } else {
-    //   headers = header || this.options;
-    // }
-    //  console.log(headers);
-    headers = header || this.options;
+    console.log('service',header);
     try {
-      console.log('this.prefix + url', this.prefix + url);
-      console.log('this.prefix + resource', resource);
-      console.log('this.prefix + headers', headers);
-      return this.http.post(url, resource, headers).pipe(
+      return this.http.post(url, resource, header).pipe(
         map(response => {
           return response;
         }),

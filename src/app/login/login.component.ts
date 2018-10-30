@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   loginSubmit() { // valid login function 
     this.submitted = true;
     if (this.LoginForm.valid) {
-      console.log("login details");
       this.verifyLogin();
     } else {
       this.showErrors = true;
@@ -51,11 +50,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.loginService.loginApi(this.LoginForm.value)
       .subscribe(
         (exp_res) => {
-          console.log(exp_res);
           if (exp_res.code === 200) {
-            exp_res.userId = 'user';
-            sessionStorage.setItem('userData', JSON.stringify(exp_res));
-            localStorage.setItem('userId', exp_res.userId);
+            // exp_res.userId = 'user';
+            // sessionStorage.setItem('userData', JSON.stringify(exp_res));
+            // localStorage.setItem('userId', exp_res.userId);
             this.optBox = true;
           } else {
             this.showErrors = true;
@@ -89,9 +87,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
         (exp_res) => {
           if (exp_res.code === 200) {
             sessionStorage.setItem('userData', JSON.stringify(exp_res.token));
-            if(localStorage.getItem('userId')){
+            if(localStorage.getItem('userId') === exp_res.data.userId){
               this.router.navigate(['cart']);
             }else{
+              localStorage.setItem('userId', exp_res.data.userId);
               this.router.navigate(['vendorSearch']);
             }
           } else {

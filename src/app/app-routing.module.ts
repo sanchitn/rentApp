@@ -7,12 +7,12 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'order-summary', component: OrderSummaryComponent },
   { path: 'vendorSearch', loadChildren: './search/search.module#SearchModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartModule' },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];

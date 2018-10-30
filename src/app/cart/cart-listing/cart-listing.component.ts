@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../shared/local-storage.service';
 import { HttpService } from '../../shared/http.service'
+import { CartService } from './cart.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart-listing',
@@ -12,8 +13,8 @@ export class CartListingComponent implements OnInit {
   //transport = 0
   private items: any;
   totalSum = 0;
-  constructor(private localStorages: LocalStorageService, 
-    private HttpService: HttpService, private router:Router) { }
+  constructor(private localStorages: LocalStorageService,
+    private HttpService: HttpService, private cartSerivce: CartService, private router: Router) { }
 
   transportationPrice = []
 
@@ -39,14 +40,11 @@ export class CartListingComponent implements OnInit {
       var total = 0;
       var totalPieces = 0;
       var checked = this.transportationPrice.filter((item) => {
-
-
         return item.isChecked == true
       })
 
 
       for (let i = 0; i < info.items.length; i++) {
-
         let item_total_price = info.items[i]['price_unit'] * info.items[i]['needed_quantity'];
         info.items[i]['item_total_price'] = item_total_price;
         total = total + item_total_price;
@@ -80,7 +78,7 @@ export class CartListingComponent implements OnInit {
         if (index == i) {
           this.totalSum = this.totalSum + value
           item.isChecked = true;
-          this.cartInfo.transportationPrice = this.transportationPrice[index];
+          this.cartInfo.transportationPrice.push(this.transportationPrice[index]);
 
         } else {
           if (item.isChecked == true) {
@@ -104,12 +102,24 @@ export class CartListingComponent implements OnInit {
 
   checkout(data) {
     this.localStorages.setKey('finalCartDetails', data);
+    let headers = {
+      'headers':{
+        'authorization':JSON.parse(sessionStorage.getItem('userData'))
+      }
+    }
     if (sessionStorage.getItem('userData')) {
-      // this.HttpService.postRequest().subscribe(data => {
-      // })
-      
+      this.cartSerivce.createOrder(data, headers).subscribe(
+        (result: any) => {
+          if (result.code === 200) {
+            console.log('correct');
+          }
+          // result.map(item => {
+          // })
+        }, (error) => {
+          console.log("cart data not set", error)
+        })
       this.router.navigate(['order-summary']);
-    }else{
+    } else {
       console.log("user not logged");
       this.router.navigate(['login']);
     }
