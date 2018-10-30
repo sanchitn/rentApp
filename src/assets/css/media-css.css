@@ -1,0 +1,93 @@
+
+@media only screen and (max-width : 1024px)
+ {
+	
+	.product-image{width:300px;float:left;margin-right:20px;}
+	.detail{float: left;}
+	 
+	 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	
+.logo-main {
+    
+    width: 100%;
+    text-align: center;
+} 
+
+.call-us{ margin-top: 31px;}
+.gray-container h1{ font-size: 18px;  margin-top: 15px;}
+
+.gray-container p{font-size:12px;line-height: 25px; margin-top: 15px;width:500px;}
+
+.contact-bottom p,footer{font-size:12px;}
+
+.cont-01{ width: auto;  margin: 0 auto;float:none;}
+
+.cont-02{ margin: 0 auto;  width: auto;   float: none;}
+
+.checkout-btn,.btn-sm{padding: 14px 32px; font-size: 15px;}
+
+.cont-01 strong,.cont-02 strong{margin-bottom:27px;}
+
+.cont-01 strong,.cont-02 strong{font-size:20px;}
+
+.cont-02 b,.cont-02 b{font-size:18px;}
+
+.cont-01{min-width:19%;}
+
+#products th, #transport th{font-size:14px;}
+
+.navbar{margin: 0 auto;   width: 382px;  float: none;}
+
+.product-summmary{max-width:90%;margin: 12px 0px;}
+
+#products th, #transport th,.total-bar,.refundable-row,#products tr.total td,.address-details label,.product-summmary .col-01,
+.login-main h2{font-size:14px;}
+
+.total-bar{max-width:84%;float:none;}
+
+#products td, #transport td,.address-details select, .address-details input[type="text"],
+.product-summmary .col-01 span,.white-box input[type="text"],.white-box .mob-number input[type="text"],.qty{font-size:12px;}
+
+.product-summmary{max-width:90%;margin: 12px 0px;}
+
+.address-details{margin:20px 0;}
+
+.col-01{margin-bottom:15px;}
+
+.login-main{max-width: 408px;}
+
+.login-main h1{font-size:20px;}
+
+.white-box .mob-number input[type="text"]{width:300px;}
+
+.detail{float: left;}
+.product-image{width:200px;float:left;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.address-details select, .address-details input[type="text"]{    width: 308px;}
+
+	.checkout-btn{    padding: 9px 41px;  font-size: 19px;}
+
+    .col-01{margin-bottom:15px;}
+
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+
+} 	 
+	

@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class VendorService extends BaseService {
-  private endPoint = 'http://localhost:3005';
+  private endPoint = 'http://192.168.0.148:3005';
 
   // constructor(private httpMethod:HttpService) {
     constructor(private httpClient: HttpClient) {
