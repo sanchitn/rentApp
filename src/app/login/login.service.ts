@@ -18,7 +18,7 @@ export class LoginService extends BaseService {
     // this.endPoint = Object.freeze();
   }
 
-  private endPoint = 'http://192.168.0.148:3005';
+  private endPoint = this.prefix
 
   loginApi(data): Observable<any> {
     var url = `${this.endPoint}/signIn`;
