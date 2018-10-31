@@ -9,7 +9,7 @@ import { LocalStorageService } from '../../shared/local-storage.service'
 })
 export class ItemListingComponent implements OnInit {
   private vendorId: any;
-  private vendorInfo: any;
+  public vendorInfo: any;
   itemDetails = { items: [] };
   cartDetails = [];
   key = 'CartItems'
@@ -19,8 +19,8 @@ export class ItemListingComponent implements OnInit {
     })
   }
   private qty = 0;
-  private buttonDisabled = true;
-  private showMsg = false;
+  public buttonDisabled = true;
+  public showMsg = false;
 
   ngOnInit() {
     console.log(this.buttonDisabled);

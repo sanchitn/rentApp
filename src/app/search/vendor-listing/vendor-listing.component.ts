@@ -19,7 +19,7 @@ export class VendorListingComponent implements OnInit {
   states = [{ id: 0, state_name: "Select State" }];
   cities = [{ id: 0, city_name: "Select City" }];
   vendorDetails = [];
-  private resultStatus = false;
+  public resultStatus = false;
   private serachData;
 
   ngOnInit() {

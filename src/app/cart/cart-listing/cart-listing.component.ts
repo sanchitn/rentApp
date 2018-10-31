@@ -17,11 +17,11 @@ export class CartListingComponent implements OnInit {
     private HttpService: HttpService, private cartSerivce: CartService, private router: Router) { }
 
   transportationPrice = [];
-  private minLimit: number = 500;
-  private maxLimit: number = 1000;
-  private uptoMinLimit: number = 300;
-  private uptoMaxLimit: number = 500;
-  private paymentMode: string[] = ['Cash', 'Credit Card', 'Debit Card'];
+  public minLimit: number = 500;
+  public maxLimit: number = 1000;
+  public uptoMinLimit: number = 300;
+  public uptoMaxLimit: number = 500;
+  public paymentMode: string[] = ['Cash', 'Credit Card', 'Debit Card'];
 
   ngOnInit() {
     if (this.localStorages.getKey('transportation') != null) {
