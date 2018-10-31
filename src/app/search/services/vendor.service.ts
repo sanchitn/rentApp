@@ -18,7 +18,7 @@ export class VendorService extends BaseService {
       super(httpClient);
    }
   findVendors(searchData):Observable<any>{
-    return this.getData(`${this.endPoint}/getVendorDetail?cityId=`+searchData.cityId+`&stateId=`+searchData.stateId+`&zipCode=`+searchData.zipcode);
+    return this.getData(`${this.prefix}/getVendorDetail?cityId=`+searchData.cityId+`&stateId=`+searchData.stateId+`&zipCode=`+searchData.zipcode);
  }
 
  findVendorItems(vendorId):Observable<any>{
