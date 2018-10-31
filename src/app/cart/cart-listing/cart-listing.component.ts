@@ -16,7 +16,12 @@ export class CartListingComponent implements OnInit {
   constructor(private localStorages: LocalStorageService,
     private HttpService: HttpService, private cartSerivce: CartService, private router: Router) { }
 
-  transportationPrice = []
+  transportationPrice = [];
+  private minLimit: number = 500;
+  private maxLimit: number = 1000;
+  private uptoMinLimit: number = 300;
+  private uptoMaxLimit: number = 500;
+  private paymentMode: string[] = ['Cash', 'Credit Card', 'Debit Card'];
 
   ngOnInit() {
     if (this.localStorages.getKey('transportation') != null) {
@@ -24,7 +29,7 @@ export class CartListingComponent implements OnInit {
       this.transportationPrice = JSON.parse(this.localStorages.getKey('transportation'));
     } else {
       this.transportationPrice = [
-        { key: "1-way transportation ( within 1km)", value: 100, isChecked: false },
+        { key: "1-way transportation ( within 1km)", value: 100, isChecked: true },
         { key: "2-way transportation ( within 1km)", value: 200, isChecked: false },
         { key: "1-way transportation ( within 1-5km)", value: 200, isChecked: false },
         { key: "2-way transportation ( within 1-5km)", value: 400, isChecked: false }
@@ -101,10 +106,11 @@ export class CartListingComponent implements OnInit {
   }
 
   checkout(data) {
+
     this.localStorages.setKey('finalCartDetails', data);
     let headers = {
-      'headers':{
-        'authorization':JSON.parse(sessionStorage.getItem('userData'))
+      'headers': {
+        'authorization': JSON.parse(sessionStorage.getItem('userData'))
       }
     }
     if (sessionStorage.getItem('userData')) {

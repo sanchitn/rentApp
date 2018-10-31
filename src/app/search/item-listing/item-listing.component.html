@@ -24,12 +24,12 @@
          <td *ngIf="!item.inventory">NA</td>
          <td *ngIf="item.inventory">Rs. {{item.price_unit}}</td>
          <td *ngIf="!item.inventory">NA</td>
-         <td><input *ngIf="item.inventory" min="0" max="{{item.inventory.available_quantity}}" (input)="addItem($event.target.value,item,vendorInfo)" [disabled]="!item.inventory" type="number" class="qty"></td>
+         <td><input *ngIf="item.inventory" [(ngModel)]="qty" min="0" max="{{item.inventory.available_quantity}}" (input)="addItem($event.target.value,item,vendorInfo)" [disabled]="!item.inventory" type="number" class="qty"></td>
        </tr>
      </table>
-         
-     
-     <input  (click)=addToCart(itemDetails) type="button" class="btn-sm" value="Next"> 
+         <span *ngIf="showMsg">Please fill quantity of items</span>
+     <input  type="button" [disabled]="buttonDisabled"  (click)=addToCart(itemDetails) class="btn-sm" value="Next">  
+     <!--    -->
 </div>
 
 

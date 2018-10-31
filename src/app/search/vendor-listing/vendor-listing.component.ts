@@ -32,7 +32,6 @@ export class VendorListingComponent implements OnInit {
 
   getStates() {
     var data = {};
-
     var routePoint = "getStates"
     this.statesService.findStates(data, routePoint).subscribe(
       (result: any) => {
@@ -43,7 +42,6 @@ export class VendorListingComponent implements OnInit {
         console.log("Herer====>", error)
       })
     //console.log("==>",datas)
-
   }
 
   onChangeGetCities(deviceValue) {
@@ -55,10 +53,8 @@ export class VendorListingComponent implements OnInit {
           return this.cities.push(item)
         })
       }, (error) => {
-
         console.log("Herer====>", error)
       })
-
   }
 
   onSubmit() {
@@ -67,7 +63,6 @@ export class VendorListingComponent implements OnInit {
       'stateId': this.model.state,
       'zipcode': this.model.zipCode
     }
-    // var routePath="getVendorDetail?cityId="+this.model.city+"&stateId="+this.model.state+"&zipCode="+this.model.zipCode
     this.vendorService.findVendors(this.serachData).subscribe(
       (result: any) => {
         console.log(result);
@@ -77,8 +72,7 @@ export class VendorListingComponent implements OnInit {
         } else {
           this.resultStatus = false;
           this.messageResult = result.message;
-          // this.vendorDetails=result.vendorInfo
-        }
+          }
       }, (error) => {
         console.log("Herer====>", error)
       })
