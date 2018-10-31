@@ -86,11 +86,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .subscribe(
         (exp_res) => {
           if (exp_res.code === 200) {
+           
+            localStorage.setItem('userId', exp_res.data.userId);
             sessionStorage.setItem('userData', JSON.stringify(exp_res.token));
-            if(localStorage.getItem('userId') === exp_res.data.userId){
+            if(localStorage.getItem('userId')  && localStorage.getItem('finalCartDetails') ){
               this.router.navigate(['cart']);
             }else{
-              localStorage.setItem('userId', exp_res.data.userId);
+              //localStorage.setItem('userId', exp_res.data.userId);
               this.router.navigate(['vendorSearch']);
             }
           } else {

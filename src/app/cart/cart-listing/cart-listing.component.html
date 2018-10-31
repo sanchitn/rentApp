@@ -11,7 +11,7 @@
          <th width="165px">Price</th>
        </tr>
        <tr *ngFor="let itemDetail of cartInfo.items">
-         <td>{{itemDetail.item_name}}</td>
+         <td>{{itemDetail.item_name | uppercase }}</td>
          <td>{{itemDetail.needed_quantity}} pcs</td>
          <td>Rs. {{itemDetail.item_total_price}}</td>
        </tr>

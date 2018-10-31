@@ -19,12 +19,12 @@
          <th width="165px">No. Pcs</th>
        </tr>
        <tr *ngFor="let item of vendorInfo.items">
-         <td>{{item.item_name}}</td>
+         <td>{{item.item_name | uppercase}}</td>
          <td *ngIf="item.inventory">{{item.inventory.available_quantity}} pcs</td>
          <td *ngIf="!item.inventory">NA</td>
          <td *ngIf="item.inventory">Rs. {{item.price_unit}}</td>
          <td *ngIf="!item.inventory">NA</td>
-         <td><input *ngIf="item.inventory" [(ngModel)]="qty" min="0" max="{{item.inventory.available_quantity}}" (input)="addItem($event.target.value,item,vendorInfo)" [disabled]="!item.inventory" type="number" class="qty"></td>
+         <td><input *ngIf="item.inventory"  min="1" max="{{item.inventory.available_quantity}}" (input)="addItem($event.target.value,item,vendorInfo)" [disabled]="!item.inventory" type="number" class="qty"></td>
        </tr>
      </table>
          <span *ngIf="showMsg">Please fill quantity of items</span>

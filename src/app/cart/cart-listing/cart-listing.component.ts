@@ -34,6 +34,7 @@ export class CartListingComponent implements OnInit {
         { key: "1-way transportation ( within 1-5km)", value: 200, isChecked: false },
         { key: "2-way transportation ( within 1-5km)", value: 400, isChecked: false }
       ];
+      this.localStorages.setKey('transportation', this.transportationPrice);
     }
     this.getCartDetails();
   }
@@ -114,6 +115,7 @@ export class CartListingComponent implements OnInit {
       }
     }
     if (sessionStorage.getItem('userData')) {
+      
       this.cartSerivce.createOrder(data, headers).subscribe(
         (result: any) => {
           if (result.code === 200) {
@@ -126,7 +128,7 @@ export class CartListingComponent implements OnInit {
         })
       this.router.navigate(['order-summary']);
     } else {
-      console.log("user not logged");
+    
       this.router.navigate(['login']);
     }
   }

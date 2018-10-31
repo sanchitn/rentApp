@@ -6,7 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class BaseService {
-  protected prefix = 'http://localhost:3005';
+  protected prefix = 'http://192.168.0.148:3005';
   protected headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   protected options = { headers: this.headers };
   private router: Router;
